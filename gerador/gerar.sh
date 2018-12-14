@@ -300,7 +300,7 @@ elif [[ ${varread} = 5 ]]; then
 start_gen
 elif [[ ${varread} = 6 ]]; then
 echo -ne "\033[1;36m"
-cat /etc/gerar-sh-log 2>/dev/null || echo "NENHUM LOG NO MOMENTO"
+cat /etc/gerar-sh-log 2>/dev/null || echo "NINGUN LOG DE MOMENTO"
 echo -ne "\033[0m" && read -p "Enter"
 elif [[ ${varread} = 7 ]]; then
 message_gen
