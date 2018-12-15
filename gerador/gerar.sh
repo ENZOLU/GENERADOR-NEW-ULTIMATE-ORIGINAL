@@ -283,7 +283,7 @@ echo -e "[7] = CAMBIAR MENSAJE"
 echo -e "[0] = SALIR"
 echo -e "$BARRA"
 while [[ ${varread} != @([0-8]) ]]; do
-read -p "Opcao: " varread
+read -p "Opcion: " varread
 done
 echo -e "$BARRA"
 if [[ ${varread} = 0 ]]; then
