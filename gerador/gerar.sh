@@ -9,11 +9,10 @@ BARRA="\033[1;36m============================================\033[0m"
 echo -e "$BARRA"
 cat << EOF
 
-           NEW KEY GENERATOR BY 8TH
-           INSTALACOES: $(cat $IVAR)
+           NEW KEY GENERATOR BY MARCHNICK
+           INSTALACIONES: $(cat $IVAR)
            
 EOF
-[[ -e $IVAR2 ]] && echo -e "\033[1;32mFIXKEY: $(cat $IVAR2)\033[0m"
 SCPT_DIR="/etc/SCRIPT"
 [[ ! -e ${SCPT_DIR} ]] && mkdir ${SCPT_DIR}
 rm ${SCPT_DIR}/*.x.c &> /dev/null
@@ -57,18 +56,18 @@ KEY="$1"
 i=0
 for arqx in `ls ${SCPT_DIR}`; do
 [[ $(echo $BASICINST|grep -w "${arqx}") ]] && continue
-echo -e "[$i] -> FERRAMENTA \033[1;31m[${arqx}]\033[0m"
+echo -e "[$i] -> HERRAMIENTA \033[1;31m[${arqx}]\033[0m"
 arq_list[$i]="${arqx}"
 let i++
 done
-echo -e "[x] -> TODAS FERRAMENTA"
-echo -e "[b] -> \033[1;33mINSTALACAO NEW-ADM\033[0m"
-read -p "Escolha os Arquivos a Serem Repassados: " readvalue
+echo -e "[x] -> TODAS LAS HERRAMIENTAS"
+echo -e "[b] -> \033[1;33mINSTALACION NEW-ADM\033[0m"
+read -p "Elija los archivos a ser repasados: " readvalue
 [[ -z $readvalue ]] && readvalue="b"
-read -p "Nome do Usuario ( dono da Key ): " nombrevalue
+read -p "Nombre de usuario ( comprador de la key ): " nombrevalue
 [[ -z $nombrevalue ]] && nombrevalue="unnamed"
-read -p "Key Fixa? [S/N]: " -e -i n fixakey
-[[ $fixakey = @(s|S|y|Y) ]] && read -p "IP-Fixo: " IPFIX && nombrevalue+=[FIXA]
+read -p "Key fija? [S/N]: " -e -i n fixakey
+[[ $fixakey = @(s|S|y|Y) ]] && read -p "IP-Fijo: " IPFIX && nombrevalue+=[FIXA]
 if [[ $readvalue = @(b|B) ]]; then
 #ADM BASIC
  arqslist="$BASICINST"
@@ -97,7 +96,7 @@ fi
 echo "$nombrevalue" > ${DIR}/${KEY}.name
 [[ ! -z $IPFIX ]] && echo "$IPFIX" > ${DIR}/${KEY}/keyfixa
 echo -e "$BARRA"
-echo -e "Key Ativa, e Aguardando Instalacao!"
+echo -e "Key activa, y aguardando instalacion!"
 echo -e "$BARRA"
 }
 ofus () {
@@ -126,14 +125,14 @@ valuekey="$(date | md5sum | head -c10)"
 valuekey+="$(echo $(($RANDOM*10))|head -c 5)"
 fun_list "$valuekey"
 keyfinal=$(ofus "$IP:8888/$valuekey/$LIST")
-echo -e "KEY: $keyfinal\nGerada!"
+echo -e "KEY: $keyfinal\ngenrada!"
 echo -e "$BARRA"
-read -p "Enter to Finalize"
+read -p "Enter para finalizar"
 }
 remover_key () {
 i=0
 [[ -z $(ls $DIR|grep -v "ERROR-KEY") ]] && return
-echo "[$i] Retornar"
+echo "[$i] Volver"
 keys="$keys retorno"
 let i++
 for arqs in `ls $DIR|grep -v "ERROR-KEY"|grep -v ".name"`; do
@@ -145,7 +144,7 @@ done
 keys=($keys)
 echo -e "$BARRA"
 while [[ -z ${keys[$value]} || -z $value ]]; do
-read -p "Escolha qual remover: " -e -i 0 value
+read -p "Elija cual remover: " -e -i 0 value
 done
 [[ -d "$DIR/${keys[$value]}" ]] && rm -rf $DIR/${keys[$value]}* || return
 }
@@ -158,7 +157,7 @@ for arqs in `ls $DIR|grep -v "ERROR-KEY"|grep -v ".name"`; do
     cp ${SCPT_DIR}/$arqx ${DIR}/${arqs}/$arqx
    done
  arqsx=$(ofus "$IP:8888/$arqs/$LIST")
- echo -e "\033[1;33m[KEY]: $arqsx \033[1;32m(ATUALIZADA!)\033[0m"
+ echo -e "\033[1;33m[KEY]: $arqsx \033[1;32m(ACTUALIZADA!)\033[0m"
  fi
 let i++
 done
@@ -192,19 +191,19 @@ unset PID_GEN
 PID_GEN=$(ps x|grep -v grep|grep "http-server.sh")
 [[ ! $PID_GEN ]] && PID_GEN="\033[1;31moff" || PID_GEN="\033[1;32monline"
 echo -e "$BARRA"
-echo -e "Diretorio Dos Arquivos Repassados \033[1;31m${SCPT_DIR}\033[0m"
+echo -e "Directorio de los archivos repasados \033[1;31m${SCPT_DIR}\033[0m"
 echo -e "$BARRA"
-echo -e "[1] = $(fun_trans ${id} "GERAR 1 KEY ALEATORIA")"
-echo -e "[2] = $(fun_trans ${id} "APAGAR OLHAR KEYS")"
-echo -e "[3] = $(fun_trans ${id} "INICIAR PARAR") KEYGEN $PID_GEN\033[0m"
+echo -e "[1] = $(fun_trans ${id} "GENERAR 1 KEY ALEATORIA")"
+echo -e "[2] = $(fun_trans ${id} "APAGAR/MIRAR KEYS")"
+echo -e "[3] = $(fun_trans ${id} "INICIAR/PARAR") KEYGEN $PID_GEN\033[0m"
 echo -e "[4] = $(fun_trans ${id} "VER LOG")"
-echo -e "[5] = $(fun_trans ${id} "MUDAR MENSAGEM")"
-echo -e "[6] = $(fun_trans ${id} "ATUALIZAR KEYS FIXA")"
-echo -e "[7] = $(fun_trans ${id} "ATUALIZAR GERADOR")"
-echo -e "[0] = $(fun_trans ${id} "SAIR")"
+echo -e "[5] = $(fun_trans ${id} "CAMBIAR MENSAJE")"
+echo -e "[6] = $(fun_trans ${id} "ACTUALIZAR KEYS FIJAS")"
+echo -e "[7] = $(fun_trans ${id} "ACTUALIZAR GERADOR")"
+echo -e "[0] = $(fun_trans ${id} "SALIR")"
 echo -e "$BARRA"
 while [[ ${varread} != @([0-7]) ]]; do
-read -p "Opcao: " varread
+read -p "Opcion: " varread
 done
 echo -e "$BARRA"
 if [[ ${varread} = 1 ]]; then
